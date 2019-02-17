@@ -11,13 +11,6 @@
                    op(_, _, in)]).
 :- use_module(todo_common).
 
-% Set up the back end
-:- ensure_loaded(todo_api).
-:- use_module(library(pengines)). % shows unused, but is needed
-
-:- pengine_application(todo_app).
-:- use_module(todo_app:todo_api).
-
 
 :- http_handler(root(.), todo_page_handler, []).
 

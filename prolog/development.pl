@@ -14,6 +14,13 @@
 :- use_module(library(http/http_session)).
 :- use_module(library(http/html_write)).
 
+% Set up the back end
+:- ensure_loaded(todo_api).
+:- use_module(library(pengines)). % shows unused, but is needed
+
+:- pengine_application(todo_app).
+:- use_module(todo_app:todo_api).
+
 :- ensure_loaded(todo_page).
 
 %! go(+Port) is det.

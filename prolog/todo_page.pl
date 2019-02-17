@@ -1,7 +1,7 @@
 /** <module> Rendering
 * Predicates for generating HTML, CSS, and Javascript.
 */
-:- module(todo_page, []).
+:- module(todo_page, [todo_page_handler/1]).
 
 :- use_module(library(http/html_write)).
 :- use_module(library(http/http_dispatch)).
@@ -12,9 +12,7 @@
 :- use_module(todo_common).
 
 
-:- http_handler(root(.), todo_page_handler, []).
-
-%! meal_plan_handler(+Request) is semidet.
+%! todo_page_handler(+Request) is semidet.
 %  Handler for main meal plain page.
 todo_page_handler(Request) :-
     memberchk(method(get), Request),

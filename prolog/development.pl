@@ -21,8 +21,6 @@
 :- pengine_application(todo_app).
 :- use_module(todo_app:todo_api).
 
-:- ensure_loaded(todo_page).
-
 %! go(+Port) is det.
 %  Main entry point to start the server.
 %
@@ -32,6 +30,7 @@ go(Port) :-
     http_server(http_dispatch, [port(Port)]).
 
 % Routes
+:- use_module(todo_routes).
 
 :- multifile user:body//2.
 user:body(app, Body) -->

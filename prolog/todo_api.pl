@@ -11,6 +11,8 @@
                                    iterate/3]).
 :- use_module(library(clpfd), [transpose/2]).
 
+:- use_module(library(gensym)).
+
 % State calculations
 
 add_todo(NewTodo), [State1] -->
@@ -32,8 +34,8 @@ add_todo(NewTodo), [State1] -->
 handle_event(State0,
              add_todo(js{desc: Desc}),
              State1) :-
-    % TODO generate id randomly
-    NewTodo = todo{desc: Desc, id: 3},
+    gensym('', Id),
+    NewTodo = todo{desc: Desc, id: Id},
     phrase(add_todo(NewTodo), [State0], [State1]), !.
 
 handle_event(State, Event, State) :-

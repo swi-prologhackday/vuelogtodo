@@ -42,17 +42,26 @@ todo_page(State) -->
                      [div(class(todos),
                          [h2("To Do"),
                           \todo_list,
+                          br([]),
                           \add_todo])])).
 
 todo_list -->
     vue_html([vue_list(todo in todos,
                        li(class(todo),
-                           [$('todo.desc'),
-                            input([type(checkbox), name(delete), value($('todo.id'))])
+                           [
+                            input([type(checkbox), name(toggle)]),
+                            $('todo.desc')
                            ])
                       )]).
 
-add_todo --> html(p('someday the add')).
+add_todo -->
+    vue_html(
+        vue_form(submit(add_todo), [
+            input([type(text), name(desc), required(true),
+            placeholder('Enter ToDo')]),
+            input([type(submit), value('Add')])
+        ])
+    ).
 
 /*
 meals -->

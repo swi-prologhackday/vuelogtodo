@@ -51,14 +51,10 @@ update_state -->
     state_make_tags_sets,
     state_gen_slots.
 
-add_meal_(NewMeal), [State1] -->
+add_todo(NewTodo), [State1] -->
     [State0],
-    { Meals = [NewMeal|State0.meals],
-      State1 = State0.put(meals, Meals) }.
-
-add_meal(NewMeal) -->
-    add_meal_(NewMeal),
-    update_state.
+    { Todos = [NewTodo|State0.todos],
+      State1 = State0.put(todos, Todos)}.
 
 % Events
 
@@ -70,19 +66,14 @@ add_meal(NewMeal) -->
 %  @arg Event An atom representing a state transation.
 %  @arg NewState Dictionary representing the state that results from
 %                 applying =Event= to =CurrentState=.
-handle_event(State0, update, State1) :-
-    phrase(update_state, [State0], [State1]), !.
-handle_event(State0, rerun, State1) :-
-    phrase(state_gen_slots, [State0], [State1]), !.
+
 handle_event(State0,
-             add_meal(js{days: DaysStr, name: Name, tags: TagsStr}),
+             add_todo(js{desc: Desc}),
              State1) :-
-    string_codes(TagsStr, TagsCodes),
-    split(TagsCodes, 0',, TagsCodesList),
-    maplist(atom_codes, Tags, TagsCodesList),
-    number_string(Days, DaysStr),
-    NewMeal = meal{name: Name, days: Days, tags: Tags},
-    phrase(add_meal(NewMeal), [State0], [State1]), !.
+    % TODO generate id randomly
+    NewTodo = todo{desc: Desc, id: 3},
+    phrase(add_todo(NewTodo), [State0], [State1]), !.
+
 handle_event(State, Event, State) :-
     debug(pengine, "Unknown Pengine event ~w ~w", [State, Event]).
 

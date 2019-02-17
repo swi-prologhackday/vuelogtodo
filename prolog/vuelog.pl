@@ -1,0 +1,1 @@
+../../vuelog/prolog/vuelog.pl

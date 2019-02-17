@@ -11,6 +11,9 @@
 %
 %  @arg NewState Dictionary representing the fresh app state.
 init_state(state{
-               items: []
+               todos: [
+                    todo{id: 1, desc: "learn prolog"},
+                    todo{id: 2, desc: "learn pengines"}
+                ]
            }).
 

@@ -38,16 +38,17 @@ todo_page(State) -->
     vue_context(_{initial_state: State,
                   pengine_app_name: todo_app,
                   root_element_sel: "#app"},
-                     div(class(todos),
+                  div(id(app),
+                     [div(class(todos),
                          [h2("To Do"),
                           \todo_list,
-                          \add_todo])).
+                          \add_todo])])).
 
 todo_list -->
-    vue_html([vue_list(todo in items,
+    vue_html([vue_list(todo in todos,
                        li(class(todo),
-                           [$(todo.desc),
-                            input([type(submit), name(delete), value($(todo.id))])
+                           [$('todo.desc'),
+                            input([type(checkbox), name(delete), value($('todo.id'))])
                            ])
                       )]).
 

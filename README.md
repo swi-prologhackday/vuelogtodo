@@ -5,25 +5,23 @@ by making another example.
 
 ## install
 
-
-```prolog
-cd <root dir>
-git clone https://github.com/jamesnvc/vuelog
-
-swipl
-pack_install(css_write).
-pack_install(list_util).
-pack_install(<root dir>/vuelog).
-```
-
 Note: to make dev easier, for the moment I'm checking in symlinks that link to a vuelog clone.
 Clone Vuelog and VueToDo under the same root directory, and all should be well.
 
+
+1. git clone https://github.com/jamesnvc/vuelog
+2. git clone https://github.com/swi-prologhackday/vuelogtodo
+3. launch swipl
+4. query `pack_install(css_write).`
+5. query `pack_install(list_util).`
+
+
 ## to run
 
-TODO - readme not updated yet
-
-To run, load `example_server.pl` and use the `go/1` predicate to start the server, providing the port to run on (e.g. `go(8081).`).
+1. cd ./vuelogtodo/prolog
+2. launch swipl
+3. load it querying `[development].`
+4. use the `go/1` predicate to start the server, providing the port to run on (e.g. `go(8081).`).
 
 The app uses [Pengines][pengines] to interact with the client.
 

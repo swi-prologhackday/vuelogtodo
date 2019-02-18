@@ -36,13 +36,17 @@ todo_page(State) -->
                           br([]),
                           \add_todo])])).
 
+todo_css -->
+    css(['.complete'(['text-decoration'('line-through')])]).
+
 todo_list -->
-    vue_html([vue_list(todo in todos,
+    vue_html([\include_css(todo_css),
+              vue_list(todo in todos,
                        li(class(todo),
-                           [
-                            input([type(checkbox), name(toggle)]),
-                            $('todo.desc')
-                           ])
+                          label(['v-bind:class'('{complete: todo.complete}')],
+                                [vue_input([type(checkbox), name(toggle),
+                                            model('todo.complete')]),
+                                 $('todo.desc')]))
                       )]).
 
 add_todo -->

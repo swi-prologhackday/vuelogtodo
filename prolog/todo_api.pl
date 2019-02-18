@@ -35,8 +35,11 @@ handle_event(State0,
              add_todo(js{desc: Desc}),
              State1) :-
     gensym('', Id),
-    NewTodo = todo{desc: Desc, id: Id},
+    NewTodo = todo{desc: Desc, id: Id, complete: false},
     phrase(add_todo(NewTodo), [State0], [State1]), !.
+
+handle_event(State, update, State) :-
+    debug(pengine, "Updating state ~w", [State]).
 
 handle_event(State, Event, State) :-
     debug(pengine, "Unknown Pengine event ~w ~w", [State, Event]).
